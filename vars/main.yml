@@ -1,0 +1,6 @@
+---
+default_direct_table: filter
+default_direct_ipv: ipv4
+default_direct_priority: 5
+default_direct_chain: INPUT
+default_masquerade: no

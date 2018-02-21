@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+  <short>{{ item.name }}</short>
+  <description> {{ item.description | default(item.name) }} </description>
+{% for i in item.interfaces | default([]) %}
+  <interface name="{{ i }}"/>
+{% endfor %}
+{% for i in item.sources | default([]) %}
+  <source {% if i.address | default(False) %}address="{{ i.address }}"{% endif %} {% if i.mac | default(False) %}mac="{{ i.mac }}"{% endif %} {% if i.ipset | default(False) %}ipset="{{ i.ipset }}"{% endif %}
+  	/>
+{% endfor %}
+{% for i in item.services | default([]) %}
+  <service name="{{ i }}"/>
+{% endfor %}
+{% for i in item.ports | default([]) %}
+  <port protocol="{{ i.split('/')[1] }}" port="{{ i.split('/')[0] }}"/>
+{% endfor %}
+{% if firewalld_masquerade | default(default_masquerade) %}
+  <masquerade/>
+{% endif %}
+</zone>

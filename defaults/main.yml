@@ -1,0 +1,18 @@
+firewalld_enable: yes
+firewalld_masquerade: no
+firewalld_zones:
+  - name: public
+    description: public
+    interfaces: []
+    ports: []
+    services: [ssh]
+
+firewalld_directs:
+  - table: filter
+    ipv: ipv4
+    priority: 10
+    chain: INPUT
+    rule: ""
+
+
+

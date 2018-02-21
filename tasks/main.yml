@@ -1,0 +1,34 @@
+---
+
+- name: install firewalld
+  apt:
+    name: firewalld
+    state: present
+
+
+- name: start firewalld service
+  service:
+    name: firewalld
+    state: started
+
+
+- name: enable firewalld service
+  service:
+    name: firewalld
+    enabled: "{{ firewalld_enable }}"
+    state: started
+
+
+- name: "configuring zones"
+  template:
+    src: zone.xml
+    dest: "/etc/firewalld/zones/{{ item.name }}.xml"
+  with_items: "{{ firewalld_zones }}"
+  notify: reload firewalld rule
+
+
+- name: configuring directs
+  template:
+    src: direct.xml
+    dest: "/etc/firewalld/direct.xml"
+  notify: reload firewalld rule

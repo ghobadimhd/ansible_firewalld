@@ -1,0 +1,4 @@
+---
+
+- name: reload firewalld rule
+  service: name=firewalld state=restarted

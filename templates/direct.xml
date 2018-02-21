@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<direct>
+{% for rule in firewalld_directs | default([]) %}
+<!-- ANSIBLE GENERATED -->
+<rule table="{{rule.table | default(default_direct_table) }}" ipv="{{rule.ipv | default(default_direct_ipv) }}" priority="{{rule.priority | default(default_direct_priority) }}" chain="{{rule.chain | default(default_direct_chain) }}">{{rule.rule}}</rule>
+{% endfor %}
+</direct>
